@@ -153,7 +153,7 @@ engine.on('game_starting', function(info) {
 		else { // If won last game or first game
 			buyukcounter ++;
 			console.log('Buyuk Counter: ' + buyukcounter);
-			if(GameMode == 1 && buyukcounter < 3){// Martingale
+			if(GameMode == 1 && buyukcounter < 12){// Martingale
 				CurrentBet = BaseBet;
 				CurrentMultiplier = Multiplier;
 				
