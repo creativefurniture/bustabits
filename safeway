@@ -2,7 +2,7 @@
 //Settings
 var GameMode = 1;				//Default: 5		1 = Martingale, 2 = Paroli, 3 = D’Alembert, 4 = Pluscoup, 5 = Recovery, 6 = 40BTC
 var MaxProfitMode = true;		//Default: true		If this setting is true, you will always bet ("PercentOfTotal" * your balance), if this setting is false you will just bet your BaseBet.
-var PercentOfTotal = 0.38;	    //Default: 0.1		If MaxProfitMode is true, your BaseBet will always be ("PercentOfTotal" * your balance). Default 0.1% of your total balance.
+var PercentOfTotal = 0.10;	    //Default: 0.1		If MaxProfitMode is true, your BaseBet will always be ("PercentOfTotal" * your balance). Default 0.1% of your total balance.
 var BaseBet = 10;				//Default: 100		This is the value of your first bet (in bits) when MaxProfitMode is set to false.
 var Multiplier = 1.20;			//Default: 1.05		This is the multiplier where the bot will stop (not on GameMode 2 and 3).
 var dalembert = 1;				//Default: 1		When you play D'alembert you will raise your bet after a loss or lower your bet after a win with this amount.
