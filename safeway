@@ -1,5 +1,4 @@
-                        //[WARNING] Use this script at your own risk, nobody is responsible if you lose money on bustabit when you use this bot.
-
+//[Hasssiktir Yine başlıyoruz] Bu scripti yazan götler çok para kaybetti. sonunda sistemi kurdu. çok fazla elleşmeyin ayarlarla sonra keyfinize bakın.
 //Settings
 var GameMode = 1;				//Default: 5		1 = Martingale, 2 = Paroli, 3 = D’Alembert, 4 = Pluscoup, 5 = Recovery, 6 = 40BTC
 var MaxProfitMode = true;		//Default: true		If this setting is true, you will always bet ("PercentOfTotal" * your balance), if this setting is false you will just bet your BaseBet.
@@ -9,7 +8,7 @@ var Multiplier = 1.20;			//Default: 1.05		This is the multiplier where the bot w
 var dalembert = 1;				//Default: 1		When you play D'alembert you will raise your bet after a loss or lower your bet after a win with this amount.
 var MaxBet = 100000;			//Default: 1000000	The bot will never bet more than this amount (in bits).
 var MaxProfit = 500000;			//Default: 100000	The bot will stop when your total balance is higher that this value (in bits).
-var MaxLoss = 30000;			//Default: 25000	You will never lose more than this amount (in bits). If a bet would exceed this amount, the bot stops automatically.
+var MaxLoss = 300000;			//Default: 25000	You will never lose more than this amount (in bits). If a bet would exceed this amount, the bot stops automatically.
 var RandomBreak = 0;			//Default: 0		Before the bot places a bet it generates a random number between 0 and 100, if that number is lower than "RandomBreak" the bot will take a break for 1 game. (This will not happen on a loss streak )
 
 // Don't change anything below this if you don't know what you are doing!
@@ -153,7 +152,7 @@ engine.on('game_starting', function(info) {
 		else { // If won last game or first game
 			buyukcounter ++;
 			console.log('Buyuk Counter: ' + buyukcounter);
-			if(GameMode == 1 && buyukcounter < 12){// Martingale
+			if(GameMode == 1 && buyukcounter < 7){// Martingale
 				CurrentBet = BaseBet;
 				CurrentMultiplier = Multiplier;
 				
@@ -290,9 +289,13 @@ engine.on('cashed_out', function(data) {
 engine.on('game_crash', function(data) {
 	var newdate = new Date();
 	var timeplaying = ((newdate.getTime() - StartTime) / 1000) / 60;
+	var btcPrice = 1060;
+	var profitmBits = (engine.getBalance() - StartBalance) / 100;
+	var profitdBTC = (profitmBits / timeplaying) * 0.00144;
+	var profitdUSD = profitdBTC * btcPrice;
 	if(Break == false){
 		console.log('[BustaBot] Game crashed at ' + (data.game_crash / 100) + 'x'); 
-		console.log('[BustaBot] Session profit: ' + ((engine.getBalance() - StartBalance) / 100).toFixed(2) + ' bits in ' + Math.round(timeplaying) + ' minutes.');
+		console.log('[MWQ] Session profit: ' + profitmBits.toFixed(2) + ' bits in ' + Math.round(timeplaying) + ' minutes.' + '\nBTC: ' + profitdBTC.toFixed(8) + ' USD: ' + profitdUSD.toFixed(2));
 	} else{
 		Break = false;
 	}
