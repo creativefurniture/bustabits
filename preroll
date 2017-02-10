@@ -11,8 +11,8 @@ var MaxBet = 100000;			//Default: 1000000	The bot will never bet more than this 
 var MaxProfit = 500000;			//Default: 100000	The bot will stop when your total balance is higher that this value (in bits).
 var MaxLoss = 300000;			//Default: 25000	You will never lose more than this amount (in bits). If a bet would exceed this amount, the bot stops automatically.
 var RandomBreak = 0;			//Default: 0		Before the bot places a bet it generates a random number between 0 and 100, if that number is lower than "RandomBreak" the bot will take a break for 1 game. (This will not happen on a loss streak )
-var PrerollEnd = 12;			//Preroll bitiş yeri
-
+var PrerollEnd = 6;			//Preroll bitiş yeri
+var Martinsonrasi = 12;     //martin sonrasi ne basacaz?
 
 // Don't change anything below this if you don't know what you are doing!
 var Username = engine.getUsername();
@@ -114,7 +114,12 @@ engine.on('game_starting', function(info) {
 		if (LastResult == 'LOST' && !FirstGame && Preroll > PrerollEnd) { // Check if you lost the last game
 			if(GameMode == 1){// Martingale
 				NewProfit = LastBet + LastProfit;
-				CurrentBet = Math.round((NewProfit / LastProfit) * LastBet);
+				if (LastBet = BaseBet) {
+				CurrentBet = Martinsonrasi;
+				}
+				else{
+				CurrentBet = Math.round((LastBet * 1.13).toFixed(2));
+				}
 				CurrentMultiplier = Multiplier;
 				buyukcounter = 0;
 			}
